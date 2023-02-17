@@ -89,3 +89,6 @@ labels = np.array(labels)
 #on entraine le modele
 print("Entrainement du modèle")
 model.fit(images, labels, epochs=10)
+
+#on sauvegarde le modele
+model.save("src/ai/modeles")

@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require_once("classes/Loader.php");
+require_once("src/web/classes/Loader.php");
 
 Loader::header();
 

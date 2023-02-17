@@ -73,6 +73,7 @@ model = models.Sequential([
     layers.Dense(nb_classes, activation='softmax')
 ])
 
+print("compilation du modele")
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])

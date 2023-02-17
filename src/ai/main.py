@@ -41,7 +41,6 @@ image_paths = sorted(glob.glob(data_dir + "*_*.*"))
 
 images = []
 labels = ["bathroom", "bedroom", "kitchen", "frontal"]
-nb_classes = len(labels)
 
 for image_path in image_paths:
     # extraire le label à partir du nom de fichier
@@ -55,32 +54,38 @@ for image_path in image_paths:
 
     # ajouter l'image et le label à leurs listes respectives
     images.append(combined_image)
-    labels.append(label)
+    #on ajoute le label si il n'est pas deja dans la liste
+    if label not in labels:
+        labels.append(label)
+  
+
+nb_labels = len(labels)
 
 print("Nombre d'images chargées: {}".format(len(images)))
-model = models.Sequential([
-    layers.experimental.preprocessing.Rescaling(1./255),
-    layers.Conv2D(128,4, activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Conv2D(64,4, activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Conv2D(32,4, activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Conv2D(16,4, activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Flatten(),
-    layers.Dense(64,activation='relu'),
-    layers.Dense(nb_classes, activation='softmax')
-])
+print("Nombre de labels chargés: {}".format(nb_labels))
 
-print("compilation du modele")
+#on cree un modele
+model = models.Sequential()
+model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(img_height, img_width, 3)))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+model.add(layers.Flatten())
+model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(nb_labels))
+
+model.summary()
+
+print("Compilation du modèle")
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-"""
-model.fit( 
-    train_data,
-  	validation_data=val_data,
-  	epochs=2
-)"""
+#on prepare les donnees
+images = np.array(images)
+labels = np.array(labels)
+
+#on entraine le modele
+print("Entrainement du modèle")
+model.fit(images, labels, epochs=10)

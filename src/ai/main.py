@@ -6,11 +6,11 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from keras.utils import to_categorical
 
-# on utilise une fonction de Keras
 batch_size = 3
 img_height = 64
 img_width = 64
 
+# on charge les images du dataset
 data_dir = "dataset/"
 image_paths = sorted(glob.glob(data_dir + "*_*.*"))
 
@@ -18,7 +18,7 @@ images = []
 labels = []
 
 for image_path in image_paths:
-    # extraire le label à partir du nom de fichier
+    # on extrait le label à partir du nom de fichier
     label, extension = image_path.split("_")[-1].split(".")
 
     # on verifie que l'image est bien au format jpg/jpeg/png/gif
@@ -54,7 +54,7 @@ model.summary()
 
 print("Compilation du modèle")
 model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
+              loss='mean_absolute_percentage_error',
               metrics=['accuracy'])
 
 # on prepare les donnees
@@ -63,11 +63,11 @@ label_encoder = LabelEncoder()
 labels = label_encoder.fit_transform(labels)
 labels = to_categorical(labels)
 
-labels = np.array(labels) 
+labels = np.array(labels)
 
 # on entraine le modele
 print("Entrainement du modèle")
 model.fit(images, labels, batch_size=batch_size, epochs=10, validation_split=0.2)
 
 # on sauvegarde le modele avec l'extension ".h5" pour sauvegarder correctement le modèle
-model.save("src/ai/modeles/modele_immo.h5")  
+model.save("src/ai/modeles/modele_immo.h5")

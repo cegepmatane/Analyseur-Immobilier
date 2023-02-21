@@ -1,6 +1,5 @@
-import tensorflow as tf
 import cv2
-from tensorflow.keras import datasets, layers, models
+from tensorflow.keras import layers, models
 import glob
 import numpy as np
 from sklearn.preprocessing import LabelEncoder

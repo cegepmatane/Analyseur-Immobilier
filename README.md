@@ -16,3 +16,11 @@ L'outil sera composé de deux parties :
 - Une partie web qui permet de récupérer les données d'un bien immobilier que l'utilisateur pourra saisir et de les envoyer au modèle d'IA.
 - Une partie IA qui va recevoir les données et les traiter pour en faire une prédiction.
 
+# __Technologies utilisées :__
+- Python 3.10
+- Tensorflow 2.11.0
+- OpenCV 4.7.0
+- Numpy 1.24.2
+- Keras 2.11.0
+- Matplotlib 3.6.3
+- PHP 8.0.13

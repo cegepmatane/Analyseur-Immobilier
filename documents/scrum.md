@@ -210,7 +210,8 @@ function_1448]
   571/571 [==============================] - 12s 21ms/step - loss: 187500080.0000 - accuracy: 0.2500 - val_loss: 187499968.0000 - val_accuracy: 0.2500
   ```
 
-- Le modèle fait une prédiction :
+## Problèmes :
+- Le modèle fait la même prédiction à chaque fois, quelque soit l'image :
   ```
   2023-02-21 08:55:17.935481: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Libra
   ry (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
@@ -218,7 +219,3 @@ function_1448]
   1/1 [==============================] - 0s 114ms/step
   [[0. 0. 1. 0.]]
   ```
-  
-
-
-

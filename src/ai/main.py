@@ -1,13 +1,14 @@
 import cv2
-from tensorflow.keras import layers, models
+from tensorflow.keras import layers, models, optimizers
 import glob
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from keras.utils import to_categorical
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-batch_size = 3
+batch_size = 2
 img_height = 64
 img_width = 64
 
@@ -57,7 +58,9 @@ model.add(layers.Dense(4, activation='softmax'))
 model.summary()
 
 print("Compilation du modèle")
-model.compile(optimizer='adam',
+# on compile le modele avec un learning rate adaptatif
+opt = optimizers.Adam(learning_rate=0.001)
+model.compile(optimizer=opt,
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
@@ -66,18 +69,30 @@ images = np.array(images)
 label_encoder = LabelEncoder()
 labels = label_encoder.fit_transform(labels)
 labels = to_categorical(labels)
-
 labels = np.array(labels)
-
-    
 
 split = train_test_split(labels, images, test_size=0.25, random_state=42)
 (trainAttrX, testAttrX, trainImagesX, testImagesX) = split
 
+# on fait de l'augmentation de données pour augmenter la quantité de données d'apprentissage
+# on définit les transformations à appliquer
+datagen = ImageDataGenerator(
+    rotation_range=20,
+    zoom_range=0.1,
+    width_shift_range=0.1,
+    height_shift_range=0.1,
+    shear_range=0.1,
+    horizontal_flip=True,
+    fill_mode="nearest")
+
+# on applique les transformations sur les images
+train_generator = datagen.flow(trainImagesX, trainAttrX, batch_size=batch_size)
+
 # on entraine le modele
 print("Entrainement du modèle")
-history = model.fit(trainImagesX, trainAttrX, epochs=10, validation_data=(testImagesX, testAttrX))
+history = model.fit(trainImagesX, trainAttrX, epochs=1000, validation_data=(testImagesX, testAttrX))
 
+# on teste l'accuarcy du modele
 plt.plot(history.history['accuracy'], label='accuracy')
 plt.plot(history.history['val_accuracy'], label = 'val_accuracy')
 plt.xlabel('Epoch')
@@ -89,4 +104,4 @@ test_loss, test_acc = model.evaluate(images,  labels, verbose=2)
 print(test_acc)
 
 # on sauvegarde le modele avec l'extension ".h5" pour sauvegarder correctement le modèle
-model.save("src/ai/modeles/modele_immo2.h5")
+model.save("src/ai/modeles/modele_immo.h5")

@@ -4,15 +4,19 @@ from tensorflow.keras import models
 import numpy as np
 
 # on charge le modele
-model = models.load_model("src/ai/modeles/modele_immo2.h5")
+model = models.load_model("src/ai/modeles/modele_immo.h5")
 
 labels = ["bathroom", "bedroom", "frontal", "kitchen"]
 
 # on charge l'image
-#image_to_predict = cv2.imread("dataset/312_kitchen.jpg", cv2.IMREAD_COLOR)
-#image_to_predict = cv2.imread("dataset/58_bedroom.jpg", cv2.IMREAD_COLOR)
-#image_to_predict = cv2.imread("dataset/8_frontal.jpg", cv2.IMREAD_COLOR)
-image_to_predict = cv2.imread("dataset/92_bathroom.jpg", cv2.IMREAD_COLOR)
+path = "dataset/92_bathroom.jpg"
+#path = "dataset/312_kitchen.jpg"
+#path = "dataset/58_bedroom.jpg"
+#path = "dataset/8_frontal.jpg"
+#path = "dataset/6_frontal.jpg"
+#path = "dataset/83_bedroom.jpg"
+
+image_to_predict = cv2.imread(path, cv2.IMREAD_COLOR)
 plt.imshow(cv2.cvtColor(image_to_predict, cv2.COLOR_BGR2RGB))
 
 # on redimensionne l'image

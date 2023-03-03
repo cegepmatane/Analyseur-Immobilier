@@ -2,3 +2,61 @@ body {
     background-color: #4A47D6;
     text-align: center;
 }
+
+input, select, button{
+	border-radius:10px;
+	padding:10px;
+	margin:20px;
+	border:none;
+	font-size:15px;
+}
+
+input[type=button], input[type=submit], input[type=reset] , button{
+    cursor:pointer;
+	background-color: #013AD1;
+	color: white;
+}
+
+input[type=submit]:hover, input[type=reset]:hover, button:hover{
+	background-color: red;
+	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
+	transform:scale(1.1,1.1);
+}
+
+#files{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#files + label{
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: blue;
+  display: inline-block;
+  cursor: pointer;
+  max-width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem;
+}
+
+#files:focus + label,
+#files + label:hover{
+  background-color: red;
+}
+
+#files + label svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
+  margin-top: -0.25em;
+  /* 4px */
+  margin-right: 0.25em;
+}

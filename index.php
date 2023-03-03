@@ -5,13 +5,15 @@ require_once("src/web/classes/Loader.php");
 Loader::header();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    /*$address = $_POST['address'];
-    $surface = $_POST['surface'];
-    $rooms = $_POST['rooms'];
-    $floor = $_POST['floor'];
-    $parking = $_POST['parking'];
-    $balcony = $_POST['balcony'];
-    $terrace = $_POST['terrace'];*/
+    /*$address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
+    $surface = filter_var($_POST['surface'], FILTER_SANITIZE_STRING);
+    $rooms = filter_var($_POST['rooms'], FILTER_SANITIZE_STRING);
+    $floor = filter_var($_POST['floor'], FILTER_SANITIZE_STRING);
+    $parking = filter_var($_POST['parking'], FILTER_SANITIZE_STRING);
+    $balcony = filter_var($_POST['balcony'], FILTER_SANITIZE_STRING);
+    $terrace = filter_var($_POST['terrace'], FILTER_SANITIZE_STRING);
+    $state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);*/
+    
 
     //on uplaod les images dans le dossier uploads
     $targetDir = "uploads/"; 
@@ -19,7 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $files = $_FILES['files'];
     $allowed = array('png', 'jpg', 'gif','jpeg');
     foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name) {
-        $file_name=$_FILES["files"]["name"][$key];
+        //on sanitize les noms des images avec filter_var
+        
+        $file_name= filter_var($_FILES["files"]["name"][$key], FILTER_SANITIZE_STRING);
         $file_tmp=$_FILES["files"]["tmp_name"][$key];
         $filename = uniqid();
         $ext=pathinfo($file_name,PATHINFO_EXTENSION);
@@ -54,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>Votre projet</h1>
         <p>Format: .jpeg, .jpg, .png, .gif</p>
         <form action="index.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="files[]" id="files" multiple>
+            <input type="file" name="files[]" id="files" data-multiple-caption="{count} fichiers choisi" multiple>
             <label for="files">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
                 <span>Choisissez des images</span>
@@ -93,6 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="4">Mauvais</option>
             </select>
      */
+    
+    echo "<script src='src/web/js/main.js'></script>";
 }
 
 

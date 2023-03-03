@@ -6,7 +6,7 @@ from keras.utils import to_categorical
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from ModelParam import ModelParam
+from ModelConfig import ModelConfig
 
 # on charge les images du dataset
 data_dir = "dataset/"
@@ -20,12 +20,12 @@ for image_path in image_paths:
     label, extension = image_path.split("_")[-1].split(".")
 
     # on verifie que l'image est bien au format jpg/jpeg/png/gif
-    if extension in ModelParam.EXTENSION:
+    if extension in ModelConfig.EXTENSION:
         # on charge l'image
         image = cv2.imread(image_path, cv2.IMREAD_COLOR)
 
         # on redimensionne l'image
-        image = cv2.resize(image, (ModelParam.IMG_HEIGHT, ModelParam.IMG_WIDTH))
+        image = cv2.resize(image, (ModelConfig.IMG_HEIGHT, ModelConfig.IMG_WIDTH))
 
         # on ajoute l'image et le label dans la liste
         images.append(image)
@@ -37,13 +37,13 @@ print("Nombre d'images chargées: {}".format(len(images)))
 print("Nombre de labels chargés: {}".format(nb_labels))
 
 # on cree un modele
-model = ModelParam.cnn_model()
+model = ModelConfig.cnn_model()
 
 model.summary()
 
 print("Compilation du modèle")
 # on compile le modele avec un learning rate adaptatif
-model.compile(optimizer=ModelParam.OPTIMIZER,
+model.compile(optimizer=ModelConfig.OPTIMIZER,
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
@@ -69,11 +69,11 @@ datagen = ImageDataGenerator(
     fill_mode="nearest")
 
 # on applique les transformations sur les images
-train_generator = datagen.flow(trainImagesX, trainAttrX, batch_size=ModelParam.BATCH_SIZE)
+train_generator = datagen.flow(trainImagesX, trainAttrX, batch_size=ModelConfig.BATCH_SIZE)
 
 # on entraine le modele
 print("Entrainement du modèle")
-history = model.fit(trainImagesX, trainAttrX, epochs=ModelParam.EPOCHS, validation_data=(testImagesX, testAttrX))
+history = model.fit(trainImagesX, trainAttrX, epochs=ModelConfig.EPOCHS, validation_data=(testImagesX, testAttrX))
 
 # on teste l'accuarcy du modele
 plt.plot(history.history['accuracy'], label='accuracy')

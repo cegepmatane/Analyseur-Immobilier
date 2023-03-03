@@ -3,7 +3,7 @@
 # __Présentation du projet :__
 Le but de ce projet est de créer un outil d'analyse d'immobilier à partir d'images et de textes. Il permettra de déterminer le prix d'un bien immobilier ainsi que ses caractéristiques. Il pourra aussi permettre de déterminer si un bien immobilier est surévalué ou sous-évalué.
 
-La première partie du projet est réalisé dans le cadre du projet de spécialisation du Cégep de Matane sur un semestre. Il en résultera une preuve de concept pour le 24 février 2023 ainsi qu'un premier livrable le 4 avril 2023 qui ne contiendront qu'une petite partie du projet.
+La première partie du projet est réalisé dans le cadre du projet de spécialisation du Cégep de Matane sur un semestre. Il en résultera une preuve de concept pour le 24 février 2023. Ainsi qu'un MVP pour le 21 mars et un premier livrable le 4 avril 2023 qui ne contiendront qu'une petite partie du projet.
 
 Ce projet sera poursuivi par la suite dans un cadre professionnel pour terminer le développement de l'outil et son déploiement.
 

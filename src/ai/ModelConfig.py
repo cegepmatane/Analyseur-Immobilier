@@ -16,6 +16,9 @@ class ModelParam:
     
     @staticmethod
     def cnn_model() :
+        """
+        Fonction qui crée et retourne un modèle CNN
+        """
         m = models.Sequential()
         m.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(ModelParam.IMG_HEIGHT, ModelParam.IMG_WIDTH, 3)))
         m.add(layers.MaxPooling2D((2, 2)))
@@ -33,6 +36,9 @@ class ModelParam:
     
     @staticmethod
     def img_to_predict(image_path: str):
+        """
+        Fonction qui charge une image et la redimensionne pour la prédiction
+        """
         # on charge l'image
         image_to_predict = cv2.imread(image_path, cv2.IMREAD_COLOR)
         plt.imshow(cv2.cvtColor(image_to_predict, cv2.COLOR_BGR2RGB))

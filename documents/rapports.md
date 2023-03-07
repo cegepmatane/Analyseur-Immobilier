@@ -219,3 +219,22 @@ function_1448]
   1/1 [==============================] - 0s 114ms/step
   [[0. 0. 1. 0.]]
   ```
+
+
+
+# `07/03/2023 :`
+
+## Ce qui a été déjà fait :
+- Le modèle est capable de faire des prédiction sur des images avec près de 94% de précision 
+- La preuve de concept (PoC) a été terminé
+- La production du Minimal Viable Product (MVP) a débuté
+- Une interface web a été créée pour faciliter l'utilisation du modèle
+
+## Objectif actuel :
+- Terminer l'interface web
+- Débuter de nouveaux modèles pour reconnaître des meubles dans les images
+
+## Ce qui a été fait :
+- L'interface web affiche les images et les résultats des prédictions
+
+

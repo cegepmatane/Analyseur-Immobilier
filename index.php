@@ -13,10 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $balcony = filter_var($_POST['balcony'], FILTER_SANITIZE_STRING);
     $terrace = filter_var($_POST['terrace'], FILTER_SANITIZE_STRING);
     $state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);*/
-    
 
-    //on uplaod les images dans le dossier uploads
     $targetDir = "uploads/"; 
+    //on supprime les anciennes images du dossier uploads 
+    $files = glob($targetDir.'*'); // get all file names
+    foreach($files as $file){ // iterate files
+        if(is_file($file))
+            unlink($file); // delete file
+    }
+
+    //on upload les nouvelles images dans le dossier uploads
     $error=array();
     $files = $_FILES['files'];
     $allowed = array('png', 'jpg', 'gif','jpeg');
@@ -39,12 +45,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<h1>Votre estimation</h1>";
 
     //si dossier uploads n'est pas vide
-    if (count(glob("uploads/*")) > 0) {
+    if (count(glob($targetDir."*")) > 0) {
         //on trouve l'executabe de python
         $exec = "C:/Python/Python310/python.exe";
         //on utilise le script python
         $command = escapeshellcmd("$exec src/ai/analyse.py");
-        echo shell_exec($command);
+        shell_exec($command);
+
+        //on affiche les images avec les resultats de results.txt
+        $file = fopen("results.txt", "r");
+        $i = 0;
+        while(!feof($file)) {
+            $line = fgets($file);
+            if ($line == "") {
+                break;
+            }
+            $res = explode(";", $line);
+            $label = $res[0];
+            $img = $res[1];
+            echo "<h2>$label</h2>";
+            echo "<img src='$img' alt='image $i' width='30%' height='auto'><br>";
+            $i++;
+        }
+            
+        fclose($file);
+        
+        //on supprime le fichier results.txt
+        unlink("results.txt");
 
     }else{
         echo "Aucune image n'a été uploadée";
@@ -66,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             
             <br><br>
-            <input type="submit" value="Estimer">
+            <input type="submit" value="Analyser">
         </form>
     HTML;
 

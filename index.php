@@ -15,11 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);*/
 
     $targetDir = "uploads/"; 
-    //on supprime les anciennes images du dossier uploads 
-    $files = glob($targetDir.'*'); // get all file names
-    foreach($files as $file){ // iterate files
+    //on supprime les anciennes images du dossier uploads et results
+    $files = glob($targetDir.'*'); 
+    $files2 = glob('results/*'); 
+    $files = array_merge($files, $files2);
+    foreach($files as $file){ 
         if(is_file($file))
-            unlink($file); // delete file
+            unlink($file); 
     }
 
     //on upload les nouvelles images dans le dossier uploads
@@ -42,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    echo "<h1>Votre estimation</h1>";
+    echo "<h1>Les résultats</h1>";
 
     //si dossier uploads n'est pas vide
     if (count(glob($targetDir."*")) > 0) {
@@ -64,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $label = $res[0];
             $img = $res[1];
             echo "<h2>$label</h2>";
-            echo "<img src='$img' alt='image $i' width='30%' height='auto'><br>";
+            echo "<img src='$img' alt='image $i' width='40%' height='auto'><br>";
+            echo $res[2];
             $i++;
         }
             

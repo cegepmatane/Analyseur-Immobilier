@@ -11,8 +11,7 @@ Utilisation du dataset : https://github.com/emanhamed/Houses-dataset
 En tensorflow, on utilise généralement la methode image_dataset_from_directory() pour charger un dataset depuis un
 répertoire.
 Mais il demande à ce que le répertoire soit déjà trié : il doit contenir des sous-répertoires représentant des labels
-et qui contiennent les images correspondantes. Le dataset qu'on utilise utilise les labels directement dans le nom de l'
-image.
+et qui contiennent les images correspondantes. Le dataset qu'on utilise les labels directement dans le nom de l'image.
 
 On doit donc trouver un autre moyen de charger le dataset ou modifier le repertoire.
 
@@ -221,20 +220,44 @@ function_1448]
   ```
 
 
-
 # `07/03/2023 :`
 
 ## Ce qui a été déjà fait :
-- Le modèle est capable de faire des prédiction sur des images avec près de 94% de précision 
+- Le modèle est capable de faire des prédictions sur des images avec près de 94% de précision 
 - La preuve de concept (PoC) a été terminé
 - La production du Minimal Viable Product (MVP) a débuté
 - Une interface web a été créée pour faciliter l'utilisation du modèle
 
 ## Objectif actuel :
 - Terminer l'interface web
-- Débuter de nouveaux modèles pour reconnaître des meubles dans les images
+- Créer/utiliser de nouveaux modèles pour reconnaître des meubles dans les images
 
 ## Ce qui a été fait :
 - L'interface web affiche les images et les résultats des prédictions
 
 
+# `10/03/2023 :`
+
+## Objectif actuel :
+- Faire de la détection d'objets sur des images
+
+## Ce qui a été fait :
+- Utilisation de la librairie `ImageAI` pour faire de la détection d'objets sur des images
+- On utilise le modèle RetinaNet de la librairie
+- ImageAI utilise Pytorch et Pytorch vision
+
+## Problèmes :
+Le modèle RetinaNet de la librairie ImageAI est trop volumineux pour être ajouté au dépôt git. Il faut donc le télécharger manuellement par le lien suivant :
+https://github.com/OlafenwaMoses/ImageAI/releases/download/3.0.0-pretrained/retinanet_resnet50_fpn_coco-eeacb38b.pth
+
+Il semble que le modèle utilise des fonctionnalités de Pytorch qui ne sont pas supportées par la version de Pytorch utilisée par ImageAI : 
+```
+C:\Python\Python310\lib\site-packages\torchvision\models\_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+C:\Python\Python310\lib\site-packages\torchvision\models\_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+C:\Python\Python310\lib\site-packages\torchvision\models\_utils.py:208: UserWarning: The parameter 'pretrained_backbone' is deprecated since 0.13 and may be removed in the future, please use 'weights_backbone' instead.
+  warnings.warn(
+C:\Python\Python310\lib\site-packages\torchvision\models\_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights_backbone' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights_backbone=None`.
+  warnings.warn(msg)
+```

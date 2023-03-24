@@ -67,8 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $img = $res[1];
             echo "<h2>$label</h2>";
             echo "<img src='$img' alt='image $i' width='40%' height='auto'><br>";
-            echo $res[2];
+            echo "<h2>L'image " . $i+1 . ' contient : </h2>';
+            // on affiche la liste des objets que contient l'image s'il y en a
+            if (count($res)>2){
+                echo $res[2];
+            }
             $i++;
+            echo "<br><br>";
         }
             
         fclose($file);

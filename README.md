@@ -1,4 +1,4 @@
-# `Analyseur Immobilier`
+<h1 align="center">Analyseur Immobilier</h1>
 
 # __Présentation du projet :__
 

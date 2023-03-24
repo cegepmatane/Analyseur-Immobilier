@@ -19,10 +19,11 @@ for image_path in image_paths:
     predictions = model.predict(ModelConfig.img_to_predict(image_path))
     output_path = "results/"+os.path.basename(image_path)
     detections = detector.detectObjectsFromImage(input_image=image_path, output_image_path=output_path) 
-    lsit = []
+    objects = ""
     for eachObject in detections:
-        lsit.append(eachObject["name"])
+        objects += eachObject["name"] + ", "
+    objects = objects[:-2]
     # on affiche le label le plus probable
     monF = open("results.txt", "a")
-    monF.write(ModelConfig.LABELS[np.argmax(predictions)] + ";" + output_path + ";" + str(lsit) + "\n")
+    monF.write(ModelConfig.LABELS[np.argmax(predictions)] + ";" + output_path + ";" + objects + "\n")
     # on supprime l'image du dossier uploads

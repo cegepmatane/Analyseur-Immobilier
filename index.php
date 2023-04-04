@@ -4,6 +4,17 @@ require_once("src/web/classes/Loader.php");
 
 Loader::header();
 
+echo '<div class="loader-wrapper">
+<span class="loader"><span class="loader-inner"></span></span>
+</div>' ;
+
+echo    '<script>
+    window.addEventListener("load", function(){
+        const loader = document.querySelector(".loader-wrapper");
+        loader.classList.add("fade");
+    });
+</script>';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /*$address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
     $surface = filter_var($_POST['surface'], FILTER_SANITIZE_STRING);
@@ -13,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $balcony = filter_var($_POST['balcony'], FILTER_SANITIZE_STRING);
     $terrace = filter_var($_POST['terrace'], FILTER_SANITIZE_STRING);
     $state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);*/
+
 
     $targetDir = "uploads/"; 
     //on supprime les anciennes images du dossier uploads et results
@@ -51,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //on trouve l'executabe de python
         $exec = "C:/Python/Python310/python.exe";
         //on utilise le script python
+        //schém
         $command = escapeshellcmd("$exec src/ai/analyse.py");
         shell_exec($command);
 

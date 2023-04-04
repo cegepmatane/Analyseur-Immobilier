@@ -26,7 +26,7 @@ Il va ensuite afficher les résultats de la prédiction.
 # __Présentation du MVP :__
 
 Le MVP possède une interface web qui permettra à un utilisateur d'uploader des images d'un bien immobilier. 
-Cette interface web enverra ensuite les images aux modèles d'IA qui vONT les traiter et en faire des prédictions.
+Cette interface web enverra ensuite les images aux modèles d'IA qui vont les traiter et en faire des prédictions.
 Les prédictions seront ensuite affichées à l'utilisateur et concerne : 
 - La partie de l'image qui a été reconnue (extérieur, cuisine, chambre, salle de bain)
 - Les différents objets présents dans l'image

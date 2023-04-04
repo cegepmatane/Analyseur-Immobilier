@@ -1,6 +1,7 @@
 from tensorflow.keras import layers, models, optimizers
 import matplotlib.pyplot as plt
 import cv2
+import tensorflow as tf
 
 
 class ModelConfig:
@@ -15,7 +16,10 @@ class ModelConfig:
     LABELS = ["bathroom", "bedroom", "frontal", "kitchen"]
     EXTENSION = ["jpg", "jpeg", "png", "gif"]
     OPTIMIZER = optimizers.Adam(learning_rate=0.001)
-    MODEL = models.load_model("src/ai/modeles/modele_immo.h5")
+    #MODEL = models.load_model("src/ai/modeles/modele_immo.h5")
+    #on charge le modèle lite
+    LITE_MODEL = tf.lite.Interpreter(model_path="src/ai/modeles/modele_immo.tflite")
+
 
     @staticmethod
     def cnn_model():

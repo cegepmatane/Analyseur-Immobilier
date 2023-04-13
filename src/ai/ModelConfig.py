@@ -13,7 +13,7 @@ class ModelConfig:
     IMG_WIDTH = 64
     BATCH_SIZE = 32
     EPOCHS = 100
-    LABELS = ["bathroom", "bedroom", "frontal", "kitchen"]
+    LABELS = ["Salle de bain", "Chambre", "Façade", "cuisine"]
     EXTENSION = ["jpg", "jpeg", "png", "gif"]
     OPTIMIZER = optimizers.Adam(learning_rate=0.001)
     MODEL = models.load_model("src/ai/modeles/modele_immo.h5")

@@ -1,140 +1,167 @@
 body {
     background-color: #4A47D6;
     text-align: center;
+    overflow-x: hidden;
 }
 
-input, select, button{
-	border-radius:10px;
-	padding:10px;
-	margin:20px;
-	border:none;
-	font-size:15px;
+nav {
+    padding: 10px;
+    margin: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 }
 
-input[type=button], input[type=submit], input[type=reset] , button{
-    cursor:pointer;
-	background-color: #013AD1;
-	color: white;
+nav a {
+    color: #000;
+    background-color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
 }
 
-input[type=submit]:hover, input[type=reset]:hover, button:hover{
-	background-color: red;
-	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
-	transform:scale(1.1,1.1);
+.content {
+    background-color: silver;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    min-height: 80vh;
 }
 
-#files{
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+input, select, button {
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+    border: none;
+    font-size: 15px;
 }
 
-#files + label{
-  font-size: 1.25em;
-  font-weight: 700;
-  color: white;
-  background-color: blue;
-  display: inline-block;
-  cursor: pointer;
-  max-width: 80%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  padding: 0.625rem 1.25rem;
+input[type=button], input[type=submit], input[type=reset], button {
+    cursor: pointer;
+    background-color: #013AD1;
+    color: white;
+}
+
+input[type=submit]:hover, input[type=reset]:hover, button:hover {
+    background-color: red;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1, 1.1);
+}
+
+#files {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#files + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: blue;
+    display: inline-block;
+    cursor: pointer;
+    max-width: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
 }
 
 #files:focus + label,
-#files + label:hover{
-  background-color: red;
+#files + label:hover {
+    background-color: red;
 }
 
 #files + label svg {
-  width: 1em;
-  height: 1em;
-  vertical-align: middle;
-  fill: currentColor;
-  margin-top: -0.25em;
-  margin-right: 0.25em;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
 }
 
 .loader-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 1.25s, visibility 2s ;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1.25s, visibility 2s;
 }
 
-.fade{
-  opacity: 0;
-  visibility: hidden;
+.fade {
+    opacity: 0;
+    visibility: hidden;
 }
 
 .loader {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  position: relative;
-  border: 4px solid #Fff;
-  animation: loader 2s infinite ease;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    border: 4px solid #Fff;
+    animation: loader 2s infinite ease;
 }
 
 .loader-inner {
-  vertical-align: top;
-  display: inline-block;
-  width: 100%;
-  background-color: #fff;
-  animation: loader-inner 2s infinite ease-in;
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    background-color: #fff;
+    animation: loader-inner 2s infinite ease-in;
 }
 
 @keyframes loader {
-  0% {
-    transform: rotate(0deg);
-  }
-  
-  25% {
-    transform: rotate(180deg);
-  }
-  
-  50% {
-    transform: rotate(180deg);
-  }
-  
-  75% {
-    transform: rotate(360deg);
-  }
-  
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(180deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    75% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes loader-inner {
-  0% {
-    height: 0%;
-  }
-  
-  25% {
-    height: 0%;
-  }
-  
-  50% {
-    height: 100%;
-  }
-  
-  75% {
-    height: 100%;
-  }
-  
-  100% {
-    height: 0%;
-  }
+    0% {
+        height: 0%;
+    }
+
+    25% {
+        height: 0%;
+    }
+
+    50% {
+        height: 100%;
+    }
+
+    75% {
+        height: 100%;
+    }
+
+    100% {
+        height: 0%;
+    }
 }

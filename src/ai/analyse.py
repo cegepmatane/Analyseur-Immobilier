@@ -5,7 +5,7 @@ import glob
 import os
 
 # on charge le modele
-#model = ModelConfig.MODEL
+model = ModelConfig.MODEL
 
 detector = ObjectDetection()
 detector.setModelTypeAsRetinaNet()
@@ -31,7 +31,8 @@ image_paths = sorted(glob.glob("uploads/*.*"))
 
 for image_path in image_paths:
     # on prédit l'image
-    #predictions = model.predict(ModelConfig.img_to_predict(image_path))
+    predictions = model.predict(ModelConfig.img_to_predict(image_path))
+    """
     #on utilise le modèle lite
     interpreter = ModelConfig.LITE_MODEL
     # on récupère les entrées et sorties du modèle
@@ -42,6 +43,8 @@ for image_path in image_paths:
     input_data = ModelConfig.img_to_predict(image_path)
     interpreter.set_tensor(input_details[0]['index'], input_data)
     interpreter.invoke()
+    predictions = interpreter.get_tensor(output_details[0]['index'])"""
+
 
     output_path = "results/"+os.path.basename(image_path)
     detections = detector.detectObjectsFromImage(input_image=image_path, output_image_path=output_path, minimum_percentage_probability=20) 
@@ -49,7 +52,6 @@ for image_path in image_paths:
     for eachObject in detections:
         objects += eachObject["name"] + ", "
     objects = objects[:-2]
-    # on affiche le label le plus probable
+    # on enregistre les résultats dans un fichier
     monF = open("results.txt", "a")
     monF.write(ModelConfig.LABELS[np.argmax(predictions)] + ";" + output_path + ";" + objects + "\n")
-    # on supprime l'image du dossier uploads

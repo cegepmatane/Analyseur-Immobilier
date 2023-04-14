@@ -19,7 +19,7 @@ for image_path in image_paths:
     # on extrait le label à partir du nom de fichier
     label, extension = image_path.split("_")[-1].split(".")
 
-    # on verifie que l'image est bien au format jpg/jpeg/png/gif
+    # on vérifie que l'image est bien au format jpg/jpeg/png/gif
     if extension in ModelConfig.EXTENSION:
         # on charge l'image
         image = cv2.imread(image_path, cv2.IMREAD_COLOR)
@@ -36,18 +36,18 @@ nb_labels = len(labels)
 print("Nombre d'images chargées: {}".format(len(images)))
 print("Nombre de labels chargés: {}".format(nb_labels))
 
-# on cree un modele
+# on cree un modèle
 model = ModelConfig.cnn_model()
 
 model.summary()
 
 print("Compilation du modèle")
-# on compile le modele avec un learning rate adaptatif
+# on compile le modèle avec un learning rate adaptatif
 model.compile(optimizer=ModelConfig.OPTIMIZER,
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
-# on prepare les donnees
+# on prépare les donnees
 images = np.array(images)
 label_encoder = LabelEncoder()
 labels = label_encoder.fit_transform(labels)
@@ -57,7 +57,7 @@ labels = np.array(labels)
 split = train_test_split(labels, images, test_size=0.25, random_state=42)
 (trainAttrX, testAttrX, trainImagesX, testImagesX) = split
 
-# on fait de l'augmentation de données pour augmenter la quantité de données d'apprentissage
+# on fait de l'augmentation de données pour augmenter la quantité de données d'apprentissage,
 # on définit les transformations à appliquer
 datagen = ImageDataGenerator(
     rotation_range=20,
@@ -86,5 +86,5 @@ plt.legend(loc='lower right')
 test_loss, test_acc = model.evaluate(images, labels, verbose=2)
 print(test_acc)
 
-# on sauvegarde le modele avec l'extension ".h5" pour sauvegarder correctement le modèle
+# on sauvegarde le modèle avec l'extension ".h5" pour sauvegarder correctement le modèle
 model.save("src/ai/modeles/modele_immo.h5")

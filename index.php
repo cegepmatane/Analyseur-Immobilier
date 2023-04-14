@@ -67,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //on trouve l'executabe de python
         $exec = "C:/Python/Python310/python.exe";
         //on utilise le script python
-        //schém
         $command = escapeshellcmd("$exec src/ai/analyse.py");
         shell_exec($command);
 
@@ -132,7 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Quelle est l'adresse du bien à estimer ?</h1>
             <p>(Facultatif)</p>
             <input type="text" name="address" placeholder="Quelle est l’adresse du bien dont vous souhaitez estimer le loyer ?">
-                
 
             <h1>Détails</h1>
             <p>(Facultatif)</p>
@@ -154,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="3">Moyen</option>
                 <option value="4">Mauvais</option>
             </select>
-     */
+    */
     
     echo "<script src='src/web/js/main.js'></script>";
 }

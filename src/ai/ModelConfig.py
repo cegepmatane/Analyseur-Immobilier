@@ -13,13 +13,13 @@ class ModelConfig:
     IMG_WIDTH = 64
     BATCH_SIZE = 32
     EPOCHS = 100
-    LABELS = ["Salle de bain", "Chambre", "Façade", "cuisine"]
+    LABELS = ["Salle de bain", "Chambre", "Façade", "Cuisine"]
     EXTENSION = ["jpg", "jpeg", "png", "gif"]
     OPTIMIZER = optimizers.Adam(learning_rate=0.001)
     MODEL = models.load_model("src/ai/modeles/modele_immo.h5")
-    #on charge le modèle lite
-    #LITE_MODEL = tf.lite.Interpreter(model_path="src/ai/modeles/modele_immo.tflite")
 
+    # on charge le modèle lite
+    # LITE_MODEL = tf.lite.Interpreter(model_path="src/ai/modeles/modele_immo.tflite")
 
     @staticmethod
     def cnn_model():

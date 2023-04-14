@@ -3,6 +3,7 @@ from ModelConfig import ModelConfig
 from imageai.Detection import ObjectDetection
 import glob
 import os
+from Labels_traductions import traductions
 
 # on charge le modele
 model = ModelConfig.MODEL
@@ -26,7 +27,7 @@ Ce modèle possède 80 objets détectables :
     toothbrush.
 """
 
-# on charge les images de upload
+# on charge les images du dossier upload
 image_paths = sorted(glob.glob("uploads/*.*"))
 
 for image_path in image_paths:
@@ -45,16 +46,16 @@ for image_path in image_paths:
     interpreter.invoke()
     predictions = interpreter.get_tensor(output_details[0]['index'])"""
 
-
-    output_path = "results/"+os.path.basename(image_path)
-    detections = detector.detectObjectsFromImage(input_image=image_path, output_image_path=output_path, minimum_percentage_probability=20) 
+    output_path = "results/" + os.path.basename(image_path)
+    detections = detector.detectObjectsFromImage(input_image=image_path, output_image_path=output_path,
+                                                 minimum_percentage_probability=20)
     objects = ""
     for eachObject in detections:
-        objects += eachObject["name"] + ", "
+        objects += traductions[eachObject["name"]] + ", "
     objects = objects[:-2]
     # on enregistre les résultats dans un fichier pour les afficher sur la page web et dans un rapport téléchargeable
-    monF = open("results.txt", "a")
+    monF = open("results.txt", "a", encoding="utf-8")
     monF.write(ModelConfig.LABELS[np.argmax(predictions)] + ";" + output_path + ";" + objects + "\n")
     monF.close()
-    rapport = open("rapport.csv", "a")
+    rapport = open("rapport.csv", "a", encoding="utf-8")
     rapport.write(ModelConfig.LABELS[np.argmax(predictions)] + ";" + objects + "\n")

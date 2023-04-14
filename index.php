@@ -35,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(is_file($file))
             unlink($file); 
     }
+    // on vide le fichier rapport.csv
+    $file = fopen("rapport.csv", "w");
+    fclose($file);
 
     //on upload les nouvelles images dans le dossier uploads
     $error=array();
@@ -91,6 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
             
         fclose($file);
+
+        // on fait un bouton pour télécharger les résultats
+        echo "<br><a class='button' href='rapport.csv' download>Télécharger le rapport</a><br>";
         
         //on supprime le fichier results.txt
         unlink("results.txt");

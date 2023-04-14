@@ -30,7 +30,7 @@ nav a {
     min-height: 80vh;
 }
 
-input, select, button {
+input, select, button, .button {
     border-radius: 10px;
     padding: 10px;
     margin: 20px;
@@ -38,7 +38,7 @@ input, select, button {
     font-size: 15px;
 }
 
-input[type=button], input[type=submit], input[type=reset], button {
+input[type=button], input[type=submit], input[type=reset], button, .button {
     cursor: pointer;
     background-color: #013AD1;
     color: white;

@@ -52,6 +52,9 @@ for image_path in image_paths:
     for eachObject in detections:
         objects += eachObject["name"] + ", "
     objects = objects[:-2]
-    # on enregistre les résultats dans un fichier
+    # on enregistre les résultats dans un fichier pour les afficher sur la page web et dans un rapport téléchargeable
     monF = open("results.txt", "a")
     monF.write(ModelConfig.LABELS[np.argmax(predictions)] + ";" + output_path + ";" + objects + "\n")
+    monF.close()
+    rapport = open("rapport.csv", "a")
+    rapport.write(ModelConfig.LABELS[np.argmax(predictions)] + ";" + objects + "\n")
